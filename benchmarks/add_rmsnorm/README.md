@@ -256,11 +256,12 @@ $$
 从仓库根目录执行。将 `GPU-UUID` 替换成 `nvidia-smi -L` 列出的空闲 RTX 5090 的 UUID。
 
 ```bash
-source scripts/gpu_env.sh
+source benchmarks/gpu_env.sh
+mkdir -p .artifacts/add-rmsnorm
 nvcc -std=c++17 -O3 -arch=sm_120 -Xptxas=-v -ccbin "${CXX:-g++}" \
-  experiments/add_rmsnorm/bench.cu -o /tmp/kernel-agent-add-rmsnorm
+  benchmarks/add_rmsnorm/bench.cu -o /tmp/kernel-agent-add-rmsnorm
 CUDA_VISIBLE_DEVICES=GPU-UUID /tmp/kernel-agent-add-rmsnorm \
-  > experiments/add_rmsnorm/results.csv
+  > .artifacts/add-rmsnorm/results.csv
 ```
 
 程序在每个 batch 上预热，再逐元素比较两个 GPU 输出，并用 CPU 公式检查误差。通过后才计时，交替运行两种实现，各测 7 轮，每轮 100 次。CSV 提供 CUDA event 测得的每次调用中位延迟、范围和拆分延迟除以融合延迟得到的加速比。分配、数据拷贝和正确性检查都在计时区间外。
@@ -273,7 +274,7 @@ CUDA_VISIBLE_DEVICES=GPU-UUID /tmp/kernel-agent-add-rmsnorm \
 从仓库根目录运行以下命令，将 `GPU-UUID` 替换成空闲 RTX 5090 的 UUID。脚本先在 profiler 外输出六个 batch 的真实延迟，再分别采集 batch 1 和 14509 下的三个 kernel。每次采集只运行指定 batch，不进入计时循环。每次运行写入一个新目录。
 
 ```bash
-bash experiments/add_rmsnorm/profile.sh GPU-UUID
+bash benchmarks/add_rmsnorm/profile.sh GPU-UUID
 ```
 
-输出目录中，`timings.csv` 是 CUDA event 测量结果，`batch-1.ncu-rep` 和 `batch-14509.ncu-rep` 是原始报告，对应的 `.txt` 是终端可读版本。比较大 batch 的 L2 和 DRAM 读写时，把拆分路径的 Add 和 RMSNorm 的值加起来，再与融合 kernel 比较。独立 kernel 的 replay 和缓存设置会影响实际计数，报告用于分析资源和访存，整体加速比取自 CSV。
+每次采集写入 `.artifacts/add-rmsnorm/profile.*/` 下的独立目录。`timings.csv` 是 CUDA event 测量结果，`batch-1.ncu-rep` 和 `batch-14509.ncu-rep` 是原始报告，对应的 `.txt` 是终端可读版本。比较大 batch 的 L2 和 DRAM 读写时，把拆分路径的 Add 和 RMSNorm 的值加起来，再与融合 kernel 比较。独立 kernel 的 replay 和缓存设置会影响实际计数，报告用于分析资源和访存，整体加速比取自 CSV。

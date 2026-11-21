@@ -8,10 +8,12 @@ if [[ $# -ne 1 || ! $1 =~ ^GPU-[[:xdigit:]]{8}(-[[:xdigit:]]{4}){3}-[[:xdigit:]]
 fi
 
 experiment_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-source "$experiment_dir/../../scripts/gpu_env.sh"
+source "$experiment_dir/../gpu_env.sh"
 export CUDA_VISIBLE_DEVICES="$1"
 nvidia-smi -i "$1" --query-gpu=name,uuid --format=csv
-output="$(mktemp -d "$experiment_dir/profile.XXXXXX")"
+artifact_dir="$experiment_dir/../../.artifacts/add-rmsnorm"
+mkdir -p "$artifact_dir"
+output="$(mktemp -d "$artifact_dir/profile.XXXXXX")"
 printf 'Results: %s\n' "$output"
 
 nvcc -std=c++17 -O3 -lineinfo -arch=sm_120 -ccbin "${CXX:-g++}" \

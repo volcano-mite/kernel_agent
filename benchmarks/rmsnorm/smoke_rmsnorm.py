@@ -12,13 +12,14 @@ from flashinfer_bench.data import BuildSpec, Solution, SourceFile, TraceSet
 from flashinfer_bench.env import get_fib_dataset_path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+BENCHMARK_DIR = Path(__file__).resolve().parent
+ROOT = BENCHMARK_DIR.parent.parent
 DEFINITION = "rmsnorm_h4096"
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=ROOT / "results/rmsnorm-smoke.json")
+    parser.add_argument("--output", type=Path, default=ROOT / ".artifacts/rmsnorm-smoke/rmsnorm-smoke.json")
     parser.add_argument("--diagnostics", action="store_true")
     args = parser.parse_args()
 
@@ -29,9 +30,9 @@ def main() -> int:
     traces = TraceSet.from_path(dataset_path)
     workloads = traces.workloads.get(DEFINITION, [])
     if DEFINITION not in traces.definitions or not workloads:
-        parser.error(f"Missing {DEFINITION} data in {dataset_path}. Run scripts/fetch_rmsnorm_data.sh.")
+        parser.error(f"Missing {DEFINITION} data in {dataset_path}. Run benchmarks/rmsnorm/fetch_rmsnorm_data.sh.")
 
-    source = ROOT / "examples/rmsnorm_smoke/rmsnorm.cu"
+    source = BENCHMARK_DIR / "rmsnorm.cu"
     solution = Solution(
         name="rmsnorm_cuda_smoke",
         definition=DEFINITION,

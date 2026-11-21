@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-source "$(dirname "${BASH_SOURCE[0]}")/gpu_env.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../gpu_env.sh"
 
 revision=da915083d4c7c5e61aa3005e3d17ae488e0fc71c
 base="https://huggingface.co/datasets/flashinfer-ai/flashinfer-trace/resolve/$revision"

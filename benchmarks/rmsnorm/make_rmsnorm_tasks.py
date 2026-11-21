@@ -3,7 +3,7 @@ import json
 import random
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+BENCHMARK_DIR = Path(__file__).resolve().parent
 
 # Each replacement is scoped to the one marked line in the original kernel.
 # Wrong choices avoid out-of-bounds memory, invalid launches and barriers in branches.
@@ -66,7 +66,7 @@ REPAIRS = [
 
 
 def main():
-    source = (ROOT / "examples/rmsnorm_smoke/rmsnorm.cu").read_text()
+    source = (BENCHMARK_DIR / "rmsnorm.cu").read_text()
     randomizer = random.Random(20261120)
     tasks = []
     edge_batches = {(0, 1): 14509, (12, 2): 7, (13, 2): 1}
@@ -95,11 +95,9 @@ def main():
                 prompt += f" The regression test targets batch_size={edge_batch}."
             tasks.append({
                 "id": f"rmsnorm-{len(tasks) + 1:03d}",
-                "type": "rubric",
+                "type": "exact",
                 "question": prompt,
                 "category": "edge" if edge_batch else "triage" if blind else "repair",
-                "rubric": ["Select the replacement that restores the operator contract",
-                           "Pass the graded FlashInfer-Bench workloads"],
                 "fixture": {
                     "source": starter, "line": line, "old": broken,
                     "choices": options,
@@ -119,11 +117,9 @@ def main():
             "question": prompt,
             "category": "unanswerable",
             "fixture": {"choices": {}},
-            "expected": "UNANSWERABLE",
             "rubric": ["Abstain without inventing a measurement", f"Identify the missing {phrase} evidence"],
-            "required_reason": phrase,
         })
-    (ROOT / "benchmarks/rmsnorm/tasks.jsonl").write_text("".join(json.dumps(t) + "\n" for t in tasks))
+    (BENCHMARK_DIR / "tasks.jsonl").write_text("".join(json.dumps(t) + "\n" for t in tasks))
 
 
 if __name__ == "__main__":

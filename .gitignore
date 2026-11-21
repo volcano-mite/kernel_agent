@@ -1,20 +1,17 @@
 # Local dependencies, caches, and downloaded data
-/.venv/
-/.cache/
-/.data/
+/.venv
+/.cache
+/.data
 __pycache__/
 *.py[cod]
 
-# Benchmark output
-/results/
-/eval_results/
-/experiments/add_rmsnorm/profile.*/
-/experiments/add_rmsnorm/results.csv
-/experiments/add_rmsnorm/bench
+# Benchmark output and course submissions
+/.artifacts/
 *.ncu-rep
 
 # Local configuration and credentials
 /.git-local/
+/.workspace-archive/
 /.agents/
 /.aws/
 /.claude/

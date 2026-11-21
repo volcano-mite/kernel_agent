@@ -13,18 +13,18 @@ Ryan Hou、Sheng Wei · EE P 500 D · Autumn 2026
 | 已有入口 | 用途 |
 | --- | --- |
 | [README](../README.md) | 安装环境、下载固定版本的 FlashInfer-Trace 数据、配置单卡运行 |
-| [RMSNorm smoke 脚本](../scripts/smoke_rmsnorm.py) | 把固定的 CUDA 样例编译为 PyTorch 扩展，评测 `rmsnorm_h4096` 的 14 个官方工作负载，可对一个工作负载采集诊断 |
-| [Smoke 候选](../examples/rmsnorm_smoke/rmsnorm.cu) | 验证评测器的成功路径，也可用于早期性能排查 |
-| [Add + RMSNorm 微基准](../experiments/add_rmsnorm/README.md) | 练习采集和解读 Nsight Compute profile，观察融合前后的访存与延迟 |
+| [RMSNorm smoke 脚本](../benchmarks/rmsnorm/smoke_rmsnorm.py) | 把固定的 CUDA 样例编译为 PyTorch 扩展，评测 `rmsnorm_h4096` 的 14 个官方工作负载，可对一个工作负载采集诊断 |
+| [Smoke 候选](../benchmarks/rmsnorm/rmsnorm.cu) | 验证评测器的成功路径，也可用于早期性能排查 |
+| [Add + RMSNorm 微基准](../benchmarks/add_rmsnorm/README.md) | 练习采集和解读 Nsight Compute profile，观察融合前后的访存与延迟 |
 
 首个联调任务是普通 RMSNorm（`rmsnorm_h4096`）。独立微基准和 FlashInfer 头文件里的 `FusedAddRMSNormKernel` 对应 Add + RMSNorm，包含残差相加。普通 RMSNorm 的库基线应调用与其算子契约匹配的 FlashInfer 实现。正式 Agent 运行时，smoke 候选放在 Agent 可读范围之外。
 
 已有环境可在有可用 GPU 的宿主机上执行以下命令。按根目录 README 先完成依赖和数据安装。
 
 ```bash
-source scripts/gpu_env.sh
+source benchmarks/gpu_env.sh
 nvidia-smi -L
-CUDA_VISIBLE_DEVICES=GPU-UUID python scripts/smoke_rmsnorm.py --diagnostics
+CUDA_VISIBLE_DEVICES=GPU-UUID python benchmarks/rmsnorm/smoke_rmsnorm.py --diagnostics
 ```
 
 ## 两人分工
