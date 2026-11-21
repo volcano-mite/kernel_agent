@@ -1,0 +1,24 @@
+# Local dependencies, caches, and downloaded data
+/.venv/
+/.cache/
+/.data/
+__pycache__/
+*.py[cod]
+
+# Benchmark output
+/results/
+/eval_results/
+/experiments/add_rmsnorm/profile.*/
+/experiments/add_rmsnorm/results.csv
+/experiments/add_rmsnorm/bench
+*.ncu-rep
+
+# Local configuration and credentials
+/.git-local/
+/.agents/
+/.aws/
+/.claude/
+/.codex/
+.env
+.env.*
+!.env.example

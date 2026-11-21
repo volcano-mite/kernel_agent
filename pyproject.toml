@@ -1,0 +1,24 @@
+[project]
+name = "kernel-agent-bench"
+version = "0.1.0"
+requires-python = "==3.11.*"
+dependencies = [
+    "cupti-python==13.0.1",
+    "flashinfer-bench",
+    "flashinfer-python==0.6.4",
+    "setuptools",
+    "torch==2.13.0+cu130",
+]
+
+[tool.uv]
+package = false
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+
+[tool.uv.sources]
+flashinfer-bench = { git = "https://github.com/flashinfer-ai/flashinfer-bench.git", rev = "15618a67e8d7b7f49ca61b5ba3b9f26a876d0bee" }
+torch = { index = "pytorch-cu130" }
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
