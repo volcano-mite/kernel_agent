@@ -9,6 +9,7 @@ import signal
 import subprocess
 import tempfile
 import time
+from contextlib import contextmanager
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import BinaryIO
@@ -221,14 +222,59 @@ def _remove_container(name: str, environment: dict[str, str], stderr: BinaryIO) 
         stderr.write(b"Podman cleanup failed\n")
 
 
-def _copy_log(source: BinaryIO, path: Path, secrets: tuple[bytes, ...]) -> None:
-    source.seek(0)
+def _open_log(path: Path) -> BinaryIO:
     output_fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC | os.O_NOFOLLOW, 0o600)
-    with os.fdopen(output_fd, "wb") as output:
-        for line in source:
-            for secret in secrets:
-                line = line.replace(secret, b"[redacted]")
-            output.write(line)
+    return os.fdopen(output_fd, "wb")
+
+
+def _redact(data: bytes, secrets: tuple[bytes, ...]) -> bytes:
+    for secret in secrets:
+        data = data.replace(secret, b"[redacted]")
+    return data
+
+
+@contextmanager
+def _live_stdout(path: Path, secrets: tuple[bytes, ...]):
+    with tempfile.TemporaryFile(dir=path.parent) as raw, _open_log(path) as log:
+        offset = 0
+        partial = bytearray()
+
+        def publish():
+            nonlocal offset
+            # pread leaves the child's shared file offset untouched. Keep partial
+            # lines private until a credential split across writes can be redacted.
+            end = os.fstat(raw.fileno()).st_size
+            while offset < end:
+                chunk = os.pread(raw.fileno(), min(65536, end - offset), offset)
+                offset += len(chunk)
+                split = chunk.rfind(b"\n") + 1
+                if split:
+                    partial.extend(chunk[:split])
+                    log.write(_redact(bytes(partial), secrets))
+                    partial.clear()
+                partial.extend(chunk[split:])
+            log.flush()
+
+        try:
+            yield raw, publish
+        finally:
+            publish()
+            log.write(_redact(bytes(partial), secrets))
+
+
+def _communicate(process, prompt, timeout, publish):
+    deadline = time.monotonic() + timeout
+    while True:
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise subprocess.TimeoutExpired(process.args, timeout)
+        try:
+            process.communicate(prompt, timeout=min(remaining, 0.25))
+            return
+        except subprocess.TimeoutExpired:
+            # communicate retains its stdin progress across retries.
+            prompt = None
+            publish()
 
 
 def _read_usage(backend: str, stdout_path: Path) -> tuple[dict[str, int | float], bool]:
@@ -341,7 +387,7 @@ def run_agent(
     status = "launch_error"
     returncode = None
     error = None
-    with tempfile.TemporaryFile(dir=log_dir) as stdout, tempfile.TemporaryFile(dir=log_dir) as stderr:
+    with _live_stdout(stdout_path, secrets) as (stdout, publish), tempfile.TemporaryFile(dir=log_dir) as stderr:
         try:
             try:
                 process = subprocess.Popen(
@@ -353,7 +399,7 @@ def run_agent(
                 stderr.write(f"Could not start {command[0]}: {error}\n".encode())
             else:
                 try:
-                    process.communicate(prompt, timeout=timeout)
+                    _communicate(process, prompt, timeout, publish)
                     status = "completed" if process.returncode == 0 else "failed"
                     if container and process.returncode in (125, 126, 127):
                         status = "launch_error"
@@ -368,8 +414,10 @@ def run_agent(
                 returncode = process.returncode
         finally:
             duration = time.monotonic() - start
-            _copy_log(stdout, stdout_path, secrets)
-            _copy_log(stderr, stderr_path, secrets)
+            stderr.seek(0)
+            with _open_log(stderr_path) as err_log:
+                for line in stderr:
+                    err_log.write(_redact(line, secrets))
 
     usage, reported_failure = _read_usage(backend, stdout_path)
     if status == "completed" and reported_failure:

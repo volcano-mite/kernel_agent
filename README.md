@@ -2,6 +2,8 @@
 
 Kernel Agent evaluates CUDA C++ candidates for FlashInfer-Bench `rmsnorm_h4096`. A run uses one Agent, one model and one GPU or CPU Mock backend. See [the design](docs/design.md) for the evaluation stages and B/D/F variants.
 
+For dashboard development, start with the [implementation handoff](docs/dashboard.md) and its synthetic replay fixture. The CPU workflow below creates run records for local integration.
+
 ## Run the CPU workflow
 
 ```bash
@@ -61,6 +63,22 @@ python -m harness run --backend gpu --gpu-worker podman --variant B --agent clau
 ```
 
 For either Worker mode, use `--variant D` for the sanitizer and profiler, or `--variant F` for both tools and the read-only CUDA examples. D/F need `compute-sanitizer`, `ncu`, and access to GPU performance counters. An Agent can also run against `--backend mock`, with `--host-agent` available for local Mock development using a host-installed CLI.
+
+## Monitor run status
+
+Start a run on the host and copy the ID from the `Started run <run_id>` line or the output of `init`. Run the terminal monitor in a second host terminal with `watch` and `jq` installed. Replace `YOUR_RUN_ID` with that ID and use your run's results directory if you set `--results`.
+
+```bash
+sh scripts/watch_run.sh "results/YOUR_RUN_ID"
+```
+
+The monitor refreshes once a second and shows the six most recent Agent activities above the public evaluations. Add `--once` to print one snapshot. To follow the full interaction from the beginning, run:
+
+```bash
+sh scripts/watch_run.sh --agent "results/YOUR_RUN_ID"
+```
+
+For Codex, this prints messages, commands, command output on completion, and MCP tool calls and feedback. An active run streams new events until Ctrl+C. A finished run prints its saved interactions and exits. The Runner publishes complete stdout records during the session and writes the usage summary at exit. `pending` marks an evaluation awaiting a result. Successful GPU evaluations show a score relative to PyTorch eager. The [dashboard handoff](docs/dashboard.md) describes the planned browser view.
 
 ## Read a run
 

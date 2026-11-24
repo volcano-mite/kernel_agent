@@ -1,0 +1,243 @@
+{
+  "synthetic": true,
+  "snapshot": {
+    "schema_version": 1,
+    "as_of_seq": 0,
+    "run": {
+      "run_id": "0123456789abcdef0123456789abcdef",
+      "created_at": "2026-01-01T00:00:00Z",
+      "task": "rmsnorm_h4096",
+      "backend": "gpu",
+      "gpu_worker": "host",
+      "agent": "codex",
+      "model": "gpt-6.2-sol",
+      "variant": "B",
+      "evaluation_budget": 10,
+      "status": "starting"
+    },
+    "agent_activity": null,
+    "agent_summary": null,
+    "evaluations": [],
+    "best_candidate_id": null,
+    "acceptance": null
+  },
+  "events": [
+    {
+      "run_id": "0123456789abcdef0123456789abcdef",
+      "seq": 1,
+      "at": "2026-01-01T00:00:00Z",
+      "type": "run_started",
+      "payload": {
+        "status": "running"
+      }
+    },
+    {
+      "run_id": "0123456789abcdef0123456789abcdef",
+      "seq": 2,
+      "at": "2026-01-01T00:00:01Z",
+      "type": "agent_activity",
+      "payload": {
+        "summary": "Read the public task specification"
+      }
+    },
+    {
+      "run_id": "0123456789abcdef0123456789abcdef",
+      "seq": 3,
+      "at": "2026-01-01T00:00:02Z",
+      "type": "evaluation_started",
+      "payload": {
+        "evaluation_id": "00000000000000000000000000000001",
+        "candidate_id": "1111111111111111111111111111111111111111111111111111111111111111",
+        "status": "pending",
+        "started_at": "2026-01-01T00:00:02Z"
+      }
+    },
+    {
+      "run_id": "0123456789abcdef0123456789abcdef",
+      "seq": 4,
+      "at": "2026-01-01T00:00:05Z",
+      "type": "evaluation_finished",
+      "payload": {
+        "evaluation_id": "00000000000000000000000000000001",
+        "candidate_id": "1111111111111111111111111111111111111111111111111111111111111111",
+        "status": "wrong_answer",
+        "started_at": "2026-01-01T00:00:02Z",
+        "stage": "correctness",
+        "finished_at": "2026-01-01T00:00:05Z",
+        "duration_seconds": 3,
+        "detail": "tolerance",
+        "best_candidate_id": null,
+        "cases": [
+          {
+            "case_id": "demo-public-1",
+            "batch_size": 1,
+            "status": "wrong_answer",
+            "max_absolute_error": 4.75,
+            "max_relative_error": 0.51
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "0123456789abcdef0123456789abcdef",
+      "seq": 5,
+      "at": "2026-01-01T00:00:06Z",
+      "type": "agent_activity",
+      "payload": {
+        "summary": "Edited rmsnorm.cu after correctness feedback"
+      }
+    },
+    {
+      "run_id": "0123456789abcdef0123456789abcdef",
+      "seq": 6,
+      "at": "2026-01-01T00:00:08Z",
+      "type": "evaluation_started",
+      "payload": {
+        "evaluation_id": "00000000000000000000000000000002",
+        "candidate_id": "2222222222222222222222222222222222222222222222222222222222222222",
+        "status": "pending",
+        "started_at": "2026-01-01T00:00:08Z"
+      }
+    },
+    {
+      "run_id": "0123456789abcdef0123456789abcdef",
+      "seq": 7,
+      "at": "2026-01-01T00:00:12Z",
+      "type": "evaluation_finished",
+      "payload": {
+        "evaluation_id": "00000000000000000000000000000002",
+        "candidate_id": "2222222222222222222222222222222222222222222222222222222222222222",
+        "status": "passed",
+        "started_at": "2026-01-01T00:00:08Z",
+        "stage": "timing",
+        "finished_at": "2026-01-01T00:00:12Z",
+        "duration_seconds": 4,
+        "score": 5.258305,
+        "best_candidate_id": "2222222222222222222222222222222222222222222222222222222222222222",
+        "cases": [
+          {
+            "case_id": "demo-public-1",
+            "batch_size": 1,
+            "status": "passed",
+            "latency_us": 4.2,
+            "eager_latency_us": 24
+          },
+          {
+            "case_id": "demo-public-2",
+            "batch_size": 34,
+            "status": "passed",
+            "latency_us": 6.2,
+            "eager_latency_us": 30
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "0123456789abcdef0123456789abcdef",
+      "seq": 8,
+      "at": "2026-01-01T00:00:14Z",
+      "type": "evaluation_started",
+      "payload": {
+        "evaluation_id": "00000000000000000000000000000003",
+        "candidate_id": "2222222222222222222222222222222222222222222222222222222222222222",
+        "status": "pending",
+        "started_at": "2026-01-01T00:00:14Z"
+      }
+    },
+    {
+      "run_id": "0123456789abcdef0123456789abcdef",
+      "seq": 9,
+      "at": "2026-01-01T00:00:17Z",
+      "type": "evaluation_finished",
+      "payload": {
+        "evaluation_id": "00000000000000000000000000000003",
+        "candidate_id": "2222222222222222222222222222222222222222222222222222222222222222",
+        "status": "passed",
+        "started_at": "2026-01-01T00:00:14Z",
+        "stage": "timing",
+        "finished_at": "2026-01-01T00:00:17Z",
+        "duration_seconds": 3,
+        "score": 5.477226,
+        "best_candidate_id": "2222222222222222222222222222222222222222222222222222222222222222",
+        "cases": [
+          {
+            "case_id": "demo-public-1",
+            "batch_size": 1,
+            "status": "passed",
+            "latency_us": 4,
+            "eager_latency_us": 24
+          },
+          {
+            "case_id": "demo-public-2",
+            "batch_size": 34,
+            "status": "passed",
+            "latency_us": 6,
+            "eager_latency_us": 30
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "0123456789abcdef0123456789abcdef",
+      "seq": 10,
+      "at": "2026-01-01T00:00:20Z",
+      "type": "agent_finished",
+      "payload": {
+        "status": "completed",
+        "duration_seconds": 20,
+        "usage": {
+          "input_tokens": 4200,
+          "cached_input_tokens": 3200,
+          "output_tokens": 640
+        }
+      }
+    },
+    {
+      "run_id": "0123456789abcdef0123456789abcdef",
+      "seq": 11,
+      "at": "2026-01-01T00:00:21Z",
+      "type": "acceptance_started",
+      "payload": {
+        "candidate_id": "2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    },
+    {
+      "run_id": "0123456789abcdef0123456789abcdef",
+      "seq": 12,
+      "at": "2026-01-01T00:00:28Z",
+      "type": "run_finished",
+      "payload": {
+        "status": "finished",
+        "acceptance": {
+          "status": "accepted",
+          "implementation": "cuda",
+          "candidate_id": "2222222222222222222222222222222222222222222222222222222222222222",
+          "speedup": 5.406363,
+          "conservative_speedup": 5.125907,
+          "cases": [
+            {
+              "case_id": "demo-holdout-1",
+              "batch_size": 13,
+              "status": "passed",
+              "latency_us": 4.5,
+              "eager_latency_us": 26,
+              "flashinfer_latency_us": 4.8,
+              "variation_us": 0.1,
+              "eager_variation_us": 0.1
+            },
+            {
+              "case_id": "demo-holdout-2",
+              "batch_size": 97,
+              "status": "passed",
+              "latency_us": 8.5,
+              "eager_latency_us": 43,
+              "flashinfer_latency_us": 8.2,
+              "variation_us": 0.2,
+              "eager_variation_us": 0.2
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
