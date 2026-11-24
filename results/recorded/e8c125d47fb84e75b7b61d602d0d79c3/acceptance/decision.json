@@ -1,0 +1,9 @@
+{
+  "status": "accepted",
+  "implementation": "cuda",
+  "candidate_id": "ce0cec3bb1ad3f0566b0477c0744e506e1dd79528133c88b3a6ef206a0f84dd1",
+  "speedup": 6.976722640790055,
+  "conservative_speedup": 6.863847562525896,
+  "run_id": "e8c125d47fb84e75b7b61d602d0d79c3",
+  "decided_at": "2026-11-24T07:05:14.844298+00:00"
+}

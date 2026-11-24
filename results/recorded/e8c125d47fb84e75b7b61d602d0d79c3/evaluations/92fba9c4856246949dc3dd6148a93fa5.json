@@ -1,0 +1,40 @@
+{
+  "candidate_id": "8a276ba70cf09aee2941962b7a169197ee568f85c3751c5fba3422282c1d163d",
+  "backend": "gpu",
+  "operation": "evaluate",
+  "status": "wrong_answer",
+  "started_at": "2026-11-24T06:59:52.333502+00:00",
+  "stage": "correctness",
+  "cases": [
+    {
+      "case_id": "public-1",
+      "batch_size": 1,
+      "status": "wrong_answer",
+      "max_absolute_error": 4.75,
+      "max_relative_error": 0.5088756680488586,
+      "detail": "tolerance"
+    }
+  ],
+  "detail": "tolerance",
+  "compiler": {
+    "kernels": [
+      {
+        "symbol": "_ZN43_GLOBAL__N__8368d558_10_rmsnorm_cu_5afb011114rmsnorm_kernelEPKN3c108BFloat16ES3_PS1_",
+        "architecture": "sm_120",
+        "stack_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0,
+        "registers": 28,
+        "static_shared_bytes": 0
+      }
+    ]
+  },
+  "environment": {
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "cuda": "13.0",
+    "torch": "2.13.0+cu130"
+  },
+  "worker_exit_code": 0,
+  "duration_seconds": 58.96081795496866,
+  "finished_at": "2026-11-24T07:00:51.294338+00:00"
+}

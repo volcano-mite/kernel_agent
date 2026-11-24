@@ -14,6 +14,16 @@ sh scripts/watch_run.sh --agent "$RUN_DIR" # 从头显示交互，运行中的�
 
 ## 从无卡环境开工
 
+仓库附带一份 [RTX 5090 实测记录](../results/recorded/e8c125d47fb84e75b7b61d602d0d79c3)，克隆后即可从仓库根目录运行：
+
+```bash
+RUN_DIR=results/recorded/e8c125d47fb84e75b7b61d602d0d79c3
+sh scripts/watch_run.sh --once "$RUN_DIR"
+sh scripts/watch_run.sh --agent "$RUN_DIR"
+```
+
+这份只读副本包含 Codex 交互、4 次公开评测、3 份候选源码和独立验收明细。留出加速比为 6.98×，保守加速比为 6.86×。导出时保留原始测量值，移除了认证字段、用例种子、宿主机路径及工具请求中重复的完整源码。完整运行目录由宿主机保留。
+
 用 [合成回放数据](../tests/fixtures/dashboard/replay.json) 搭第一版界面。它覆盖启动、等待评测、正确性失败、修复、同一候选复测和通过验收。快照是回放起点，按 `seq` 应用后续事件就能得到每个时间点的状态。样例中的 ID、误差和测量值均为合成数据。
 
 按 [README](../README.md#run-the-cpu-workflow) 准备宿主机 Python 环境。在仓库根目录创建一个实际的 CPU Mock run。

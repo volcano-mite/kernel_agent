@@ -8,7 +8,10 @@ __pycache__/
 
 # Benchmark output and course submissions
 /.artifacts/
-/results/
+/results/*
+!/results/recorded/
+/results/recorded/*
+!/results/recorded/e8c125d47fb84e75b7b61d602d0d79c3/
 *.ncu-rep
 
 # Local configuration and credentials
