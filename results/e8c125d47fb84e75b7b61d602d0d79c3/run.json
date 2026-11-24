@@ -1,0 +1,103 @@
+{
+  "task": "rmsnorm_h4096",
+  "task_revision": "flashinfer-trace@da915083d4c7c5e61aa3005e3d17ae488e0fc71c",
+  "public_cases": [
+    {
+      "case_id": "public-1",
+      "batch_size": 1,
+      "seed": 29583
+    },
+    {
+      "case_id": "public-2",
+      "batch_size": 34,
+      "seed": 81064
+    },
+    {
+      "case_id": "public-3",
+      "batch_size": 170,
+      "seed": 14067
+    },
+    {
+      "case_id": "public-4",
+      "batch_size": 8804,
+      "seed": 65150
+    },
+    {
+      "case_id": "public-5",
+      "batch_size": 14509,
+      "seed": 78051
+    }
+  ],
+  "holdout_cases": [
+    {
+      "case_id": "holdout-1",
+      "batch_size": 7,
+      "seed": 405132
+    },
+    {
+      "case_id": "holdout-2",
+      "batch_size": 15,
+      "seed": 815026
+    },
+    {
+      "case_id": "holdout-3",
+      "batch_size": 16,
+      "seed": 986178
+    },
+    {
+      "case_id": "holdout-4",
+      "batch_size": 63,
+      "seed": 600385
+    },
+    {
+      "case_id": "holdout-5",
+      "batch_size": 64,
+      "seed": 161237
+    },
+    {
+      "case_id": "holdout-6",
+      "batch_size": 79,
+      "seed": 653026
+    },
+    {
+      "case_id": "holdout-7",
+      "batch_size": 10827,
+      "seed": 257550
+    },
+    {
+      "case_id": "holdout-8",
+      "batch_size": 11832,
+      "seed": 335178
+    },
+    {
+      "case_id": "holdout-9",
+      "batch_size": 14418,
+      "seed": 890560
+    }
+  ],
+  "backend": "gpu",
+  "variant": "B",
+  "agent": "codex",
+  "model": "gpt-6.2-sol",
+  "evaluation_budget": 10,
+  "diagnostic_budget": 2,
+  "agent_timeout": 900,
+  "worker_timeout": 300,
+  "warmups": 3,
+  "samples": 15,
+  "top_k": 3,
+  "minimum_speedup": 1.03,
+  "gpu_worker": "host",
+  "gpu_image": null,
+  "gpu_uuid": "GPU-3eb6dcde-39d1-984f-af3a-9722a0634976",
+  "host_worker": {
+    "python": "/home/ryanhou/kernelAgent/.venv/bin/python",
+    "cuda_home": "/usr/local/cuda-13.0",
+    "cc": "/opt/rh/gcc-toolset-14/root/usr/bin/gcc",
+    "cxx": "/opt/rh/gcc-toolset-14/root/usr/bin/g++"
+  },
+  "schema_version": 1,
+  "run_id": "e8c125d47fb84e75b7b61d602d0d79c3",
+  "created_at": "2026-11-24T06:59:44.058652+00:00",
+  "token_sha256": "fa8d759721802919abe31b83844f5f2d1f636dfc4ab89c655b568e67dc0ee130"
+}

@@ -1,0 +1,15 @@
+{
+  "status": "completed",
+  "returncode": 0,
+  "duration_seconds": 252.46960326004773,
+  "usage": {
+    "input_tokens": 451082,
+    "cached_input_tokens": 430540,
+    "cache_write_input_tokens": 20461,
+    "output_tokens": 2779,
+    "reasoning_output_tokens": 200
+  },
+  "stdout_path": "/home/ryanhou/kernelAgent/results/e8c125d47fb84e75b7b61d602d0d79c3/agent/agent.stdout.jsonl",
+  "stderr_path": "/home/ryanhou/kernelAgent/results/e8c125d47fb84e75b7b61d602d0d79c3/agent/agent.stderr.log",
+  "error": null
+}

@@ -1,0 +1,44 @@
+{
+  "candidate_id": "8a276ba70cf09aee2941962b7a169197ee568f85c3751c5fba3422282c1d163d",
+  "backend": "gpu",
+  "operation": "evaluate",
+  "status": "wrong_answer",
+  "started_at": "2026-11-24T06:59:52.333502+00:00",
+  "stage": "correctness",
+  "cases": [
+    {
+      "case_id": "public-1",
+      "batch_size": 1,
+      "status": "wrong_answer",
+      "max_absolute_error": 4.75,
+      "max_relative_error": 0.5088756680488586,
+      "detail": "tolerance"
+    }
+  ],
+  "detail": "tolerance",
+  "compiler": {
+    "log": "[1/3] /opt/rh/gcc-toolset-14/root/usr/bin/g++ -MMD -MF binding.o.d -DTORCH_EXTENSION_NAME=kernel_agent_candidate -DTORCH_API_INCLUDE_EXTENSION_H -isystem /home/ryanhou/kernelAgent/.venv/lib/python3.11/site-packages/torch/include -isystem /home/ryanhou/kernelAgent/.venv/lib/python3.11/site-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda-13.0/include -isystem /home/ryanhou/miniconda3/envs/boltzmann-attn/include/python3.11 -fPIC -std=c++20 -O3 -c /tmp/kernel-agent-build-pslsqr9c/binding.cpp -o binding.o \n[2/3] /usr/local/cuda-13.0/bin/nvcc -MD -MF rmsnorm.cuda.o.d -ccbin /opt/rh/gcc-toolset-14/root/usr/bin/gcc -DTORCH_EXTENSION_NAME=kernel_agent_candidate -DTORCH_API_INCLUDE_EXTENSION_H -isystem /home/ryanhou/kernelAgent/.venv/lib/python3.11/site-packages/torch/include -isystem /home/ryanhou/kernelAgent/.venv/lib/python3.11/site-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda-13.0/include -isystem /home/ryanhou/miniconda3/envs/boltzmann-attn/include/python3.11 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -gencode=arch=compute_120,code=compute_120 -gencode=arch=compute_120,code=sm_120 --compiler-options '-fPIC' -O3 --ptxas-options=-v -std=c++20 -c /tmp/kernel-agent-build-pslsqr9c/rmsnorm.cu -o rmsnorm.cuda.o \nptxas info    : 28 bytes gmem\nptxas info    : Compiling entry function '_ZN43_GLOBAL__N__8368d558_10_rmsnorm_cu_5afb011114rmsnorm_kernelEPKN3c108BFloat16ES3_PS1_' for 'sm_120'\nptxas info    : Function properties for _ZN43_GLOBAL__N__8368d558_10_rmsnorm_cu_5afb011114rmsnorm_kernelEPKN3c108BFloat16ES3_PS1_\n    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads\nptxas info    : Used 28 registers, used 0 barriers\nptxas info    : Compile time = 9.356 ms\n[3/3] /opt/rh/gcc-toolset-14/root/usr/bin/g++ rmsnorm.cuda.o binding.o -shared -L/home/ryanhou/kernelAgent/.venv/lib/python3.11/site-packages/torch/lib -lc10 -lc10_cuda -ltorch_cpu -ltorch_cuda -ltorch -ltorch_python -L/usr/local/cuda-13.0/lib64 -lcudart -o kernel_agent_candidate.so\n",
+    "log_truncated": false,
+    "kernels": [
+      {
+        "symbol": "_ZN43_GLOBAL__N__8368d558_10_rmsnorm_cu_5afb011114rmsnorm_kernelEPKN3c108BFloat16ES3_PS1_",
+        "architecture": "sm_120",
+        "stack_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0,
+        "registers": 28,
+        "static_shared_bytes": 0
+      }
+    ]
+  },
+  "environment": {
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "gpu_uuid": "3eb6dcde-39d1-984f-af3a-9722a0634976",
+    "cuda": "13.0",
+    "torch": "2.13.0+cu130"
+  },
+  "worker_log": "",
+  "worker_exit_code": 0,
+  "duration_seconds": 58.96081795496866,
+  "finished_at": "2026-11-24T07:00:51.294338+00:00"
+}

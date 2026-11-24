@@ -1,0 +1,9 @@
+{
+  "status": "failed",
+  "returncode": 1,
+  "duration_seconds": 2.3702078050700948,
+  "usage": {},
+  "stdout_path": "/home/ryanhou/kernelAgent/results/686ea0f54f034a36bfde219e2c508aa9/agent/agent.stdout.jsonl",
+  "stderr_path": "/home/ryanhou/kernelAgent/results/686ea0f54f034a36bfde219e2c508aa9/agent/agent.stderr.log",
+  "error": null
+}
