@@ -1,0 +1,11 @@
+2026-11-24T06:53:06.059431Z ERROR codex_models_manager::manager: failed to refresh available models: Connection failed: error sending request
+2026-11-24T06:53:06.139486Z ERROR codex_api::endpoint::responses_websocket: failed to connect to Responses WebSocket stage=Tls
+2026-11-24T06:53:06.191373Z ERROR codex_models_manager::manager: failed to refresh available models: Connection failed: error sending request
+2026-11-24T06:53:09.213804Z ERROR codex_models_manager::manager: failed to refresh available models: Connection failed: error sending request
+2026-11-24T06:53:09.229925Z ERROR codex_api::endpoint::responses_websocket: failed to connect to Responses WebSocket stage=Tls
+2026-11-24T06:53:09.439489Z ERROR codex_api::endpoint::responses_websocket: failed to connect to Responses WebSocket stage=Tls
+2026-11-24T06:53:09.810662Z ERROR codex_api::endpoint::responses_websocket: failed to connect to Responses WebSocket stage=Tls
+2026-11-24T06:53:10.685806Z ERROR codex_api::endpoint::responses_websocket: failed to connect to Responses WebSocket stage=Tls
+2026-11-24T06:53:12.427125Z ERROR codex_api::endpoint::responses_websocket: failed to connect to Responses WebSocket stage=Tls
+2026-11-24T06:53:15.781232Z ERROR codex_api::endpoint::responses_websocket: failed to connect to Responses WebSocket stage=Tls
+2026-11-24T06:57:39.476641Z ERROR codex_models_manager::manager: failed to refresh available models: Connection failed: error sending request

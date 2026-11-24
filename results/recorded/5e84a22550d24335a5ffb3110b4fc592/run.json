@@ -1,0 +1,21 @@
+{
+  "task": "rmsnorm_h4096",
+  "task_revision": "flashinfer-trace@da915083d4c7c5e61aa3005e3d17ae488e0fc71c",
+  "backend": "mock",
+  "variant": "B",
+  "agent": "claude",
+  "model": null,
+  "evaluation_budget": 10,
+  "diagnostic_budget": 2,
+  "agent_timeout": 900,
+  "worker_timeout": 300,
+  "warmups": 3,
+  "samples": 15,
+  "top_k": 3,
+  "minimum_speedup": 1.03,
+  "gpu_worker": "podman",
+  "gpu_image": null,
+  "schema_version": 1,
+  "run_id": "5e84a22550d24335a5ffb3110b4fc592",
+  "created_at": "2026-11-24T07:41:15.128756+00:00"
+}

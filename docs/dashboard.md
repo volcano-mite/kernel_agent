@@ -24,6 +24,14 @@ sh scripts/watch_run.sh --agent "$RUN_DIR"
 
 这份只读副本包含 Codex 交互、4 次公开评测、3 份候选源码和独立验收明细。留出加速比为 6.98×，保守加速比为 6.86×。导出时保留原始测量值，移除了认证字段、用例种子、宿主机路径及工具请求中重复的完整源码。完整运行目录由宿主机保留。
 
+在同一目录下还有四组记录，可将上例的 `RUN_DIR` 换成对应目录，用 `--once` 查看快照。
+
+| 记录 | 可用于核对的现象 |
+| --- | --- |
+| [50e9c594](../results/recorded/50e9c594908943efaf5648de1c7f8aa6) 和 [5e84a225](../results/recorded/5e84a22550d24335a5ffb3110b4fc592) | 两次独立 CPU Mock，每组各有一次正确性失败和一次通过，可验证缺少 GPU 分数及 Agent 汇总时的界面。 |
+| [686ea0f5](../results/recorded/686ea0f54f034a36bfde219e2c508aa9) | Agent 启动失败，退出码为 1。错误原因在 `agent/agent.stderr.log`，标准输出为空。 |
+| [dc4225f9](../results/recorded/dc4225f94ebf45b0ab46c21a68e9c371) | Agent 留下 17 条事件后中断，包括 TLS 错误和重连。阅读归档可用 `jq -c . "$RUN_DIR/agent/agent.stdout.jsonl"`；这组没有退出汇总，终端的 `--agent` 模式会继续等待。 |
+
 用 [合成回放数据](../tests/fixtures/dashboard/replay.json) 搭第一版界面。它覆盖启动、等待评测、正确性失败、修复、同一候选复测和通过验收。快照是回放起点，按 `seq` 应用后续事件就能得到每个时间点的状态。样例中的 ID、误差和测量值均为合成数据。
 
 按 [README](../README.md#run-the-cpu-workflow) 准备宿主机 Python 环境。在仓库根目录创建一个实际的 CPU Mock run。

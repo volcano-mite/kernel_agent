@@ -1,0 +1,38 @@
+{
+  "candidate_id": "8a276ba70cf09aee2941962b7a169197ee568f85c3751c5fba3422282c1d163d",
+  "backend": "mock",
+  "operation": "evaluate",
+  "status": "wrong_answer",
+  "started_at": "2026-11-24T07:41:37.962525+00:00",
+  "stage": "correctness",
+  "cases": [
+    {
+      "case_id": "public-1",
+      "batch_size": 1,
+      "status": "wrong_answer"
+    },
+    {
+      "case_id": "public-2",
+      "batch_size": 34,
+      "status": "wrong_answer"
+    },
+    {
+      "case_id": "public-3",
+      "batch_size": 170,
+      "status": "wrong_answer"
+    },
+    {
+      "case_id": "public-4",
+      "batch_size": 8804,
+      "status": "wrong_answer"
+    },
+    {
+      "case_id": "public-5",
+      "batch_size": 14509,
+      "status": "wrong_answer"
+    }
+  ],
+  "detail": "Simulated result. No CUDA compilation or measurement was performed.",
+  "duration_seconds": 0.0009137539891526103,
+  "finished_at": "2026-11-24T07:41:37.963464+00:00"
+}

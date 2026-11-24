@@ -1,0 +1,38 @@
+{
+  "candidate_id": "f5c60d312325c6f54a93c50f282b3c08759d5da3f829efd80ea8385d86d57802",
+  "backend": "mock",
+  "operation": "evaluate",
+  "status": "passed",
+  "started_at": "2026-11-24T02:52:43.908184+00:00",
+  "stage": "correctness",
+  "cases": [
+    {
+      "case_id": "public-1",
+      "batch_size": 1,
+      "status": "passed"
+    },
+    {
+      "case_id": "public-2",
+      "batch_size": 34,
+      "status": "passed"
+    },
+    {
+      "case_id": "public-3",
+      "batch_size": 170,
+      "status": "passed"
+    },
+    {
+      "case_id": "public-4",
+      "batch_size": 8804,
+      "status": "passed"
+    },
+    {
+      "case_id": "public-5",
+      "batch_size": 14509,
+      "status": "passed"
+    }
+  ],
+  "detail": "Simulated result. No CUDA compilation or measurement was performed.",
+  "duration_seconds": 0.000989579944871366,
+  "finished_at": "2026-11-24T02:52:43.909188+00:00"
+}
