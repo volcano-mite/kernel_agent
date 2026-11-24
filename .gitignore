@@ -1,5 +1,6 @@
 # Local dependencies, caches, and downloaded data
 /.venv
+/.venv-host
 /.cache
 /.data
 __pycache__/
@@ -7,6 +8,7 @@ __pycache__/
 
 # Benchmark output and course submissions
 /.artifacts/
+/results/
 *.ncu-rep
 
 # Local configuration and credentials

@@ -9,7 +9,7 @@ constexpr int kThreads = 256;
 constexpr float kEpsilon = 1e-5f;
 
 __global__ void rmsnorm_kernel(const at::BFloat16* input, const at::BFloat16* weight,
-                              at::BFloat16* output) {
+                               at::BFloat16* output) {
     __shared__ float sums[kThreads];
     const int lane = threadIdx.x;
     const auto row_offset = static_cast<int64_t>(blockIdx.x) * kHiddenSize;
@@ -48,8 +48,4 @@ void run(const torch::Tensor& input, const torch::Tensor& weight, torch::Tensor 
         input.data_ptr<at::BFloat16>(), weight.data_ptr<at::BFloat16>(),
         output.data_ptr<at::BFloat16>());
     C10_CUDA_KERNEL_LAUNCH_CHECK();
-}
-
-PYBIND11_MODULE(TORCH_EXTENSION_NAME, module) {
-    module.def("run", &run);
 }
