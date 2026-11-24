@@ -11,8 +11,8 @@ __pycache__/
 *.ncu-rep
 
 # Keep raw runs local. Share dashboard recordings from results/recorded/.
-/results/*
-!/results/recorded/
+!/results/
+
 
 # Local configuration and credentials
 /.git-local/
